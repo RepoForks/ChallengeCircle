@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Button Styles -->
+    <style name="ButtonStyle.NoRaise">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="ButtonStyle.Colored.NoRaise">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Colors-->
+    <color name="colorPrimary">#5fc3e4</color>
+    <color name="colorPrimaryDark">#55AFCD</color>
+    <color name="colorAccent">#e55987</color>
+
+    <color name="gradient_pink">#e55987</color>
+    <color name="gradient_blue">#5fc3e4</color>
+    <color name="input_border">#b7b7b7</color>
+</resources>
+

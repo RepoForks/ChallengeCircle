@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_background_login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/drawable_background"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextStyle.Dark.SingleLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/login_username"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/input_username"
+            style="@style/TextStyle.Dark"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/drawable_background_bordered"
+            android:hint="@string/login_username_hint"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:nextFocusDown="@+id/input_password"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="14sp"/>
+
+
+        <TextView
+            style="@style/TextStyle.Dark.SingleLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/login_password"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/input_password"
+            style="@style/TextStyle.Dark"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/drawable_background_bordered"
+            android:hint="@string/login_password_hint"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="16sp"/>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/button_login"
+                style="@style/ButtonStyle.Colored.NoRaise"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/drawable_background_button"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="@string/login"
+                android:textAllCaps="true"
+                android:textColor="@color/material_light_white"
+                android:textSize="14sp"
+                android:textStyle="normal"/>
+
+            <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/progressWheel"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="8dp"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                wheel:matProg_barColor="@color/colorAccent"
+                wheel:matProg_barWidth="4dp"
+                wheel:matProg_fillRadius="false"
+                wheel:matProg_progressIndeterminate="true"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

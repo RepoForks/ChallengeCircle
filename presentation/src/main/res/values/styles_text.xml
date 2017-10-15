@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text Dark-->
+    <style name="TextStyle.Dark" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textDarkPrimary</item>
+        <item name="android:fontFamily">"sans-serif-light"</item>
+    </style>
+
+    <style name="TextStyle.Dark.Center">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextStyle.Dark.SingleLine">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+</resources>

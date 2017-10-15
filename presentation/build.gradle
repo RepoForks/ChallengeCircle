@@ -1,0 +1,110 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+apply from: "$rootProject.projectDir/libraries.gradle"
+
+// Android Plugin
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.3'
+
+    defaultConfig {
+        applicationId 'com.jemshit.challenge'
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionName "1.0.0"
+        versionCode 1
+
+        manifestPlaceholders = [
+                manifestApplicationId: "${applicationId}"
+        ]
+
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            multiDexEnabled false
+
+            //For @string in xml files
+            resValue 'string', 'application_id', android.defaultConfig.applicationId
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            multiDexEnabled false
+
+            //For @string in xml files
+            resValue 'string', 'application_id', android.defaultConfig.applicationId + applicationIdSuffix
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+    lintOptions {
+        abortOnError false
+        disable 'InvalidPackage'
+    }
+    retrolambda {
+        jvmArgs '-noverify'
+    }
+}
+
+// Dependencies
+dependencies {
+    // Modules and .jar libraries
+    compile project(':domain')
+    compile project(':data')
+
+    //Test Libraries
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.10.0'
+
+    // Other Libraries
+    compile library.support_appcompat_v7
+    compile library.support_v4
+    compile library.support_design
+    compile library.support_recyclerview
+
+    compile library.rxjava
+    compile library.rxbinding
+    compile library.rxandroid
+    compile library.rxbinding_appcompat_v7
+    compile library.rxbinding_support_v4
+
+    compile library.dagger_compile
+    annotationProcessor library.dagger_apt
+    compile library.butterknife_compile
+    annotationProcessor library.butterknife_annotation_processor
+
+    compile library.material_dimen
+    compile library.glide
+    compile library.glide_transformations
+    compile library.materialish_progress
+
+    compile library.inject_dagger_common
+
+}

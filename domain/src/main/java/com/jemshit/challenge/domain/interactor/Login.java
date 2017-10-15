@@ -1,0 +1,30 @@
+package com.jemshit.challenge.domain.interactor;
+
+import com.jemshit.challenge.domain.ContentValidator;
+import com.jemshit.challenge.domain.exception.ParameterEmptyException;
+import com.jemshit.challenge.domain.repository.Repository;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import rx.Single;
+
+@Singleton
+public class Login {
+
+    private Repository repository;
+    private ContentValidator contentValidator;
+
+    @Inject
+    public Login(Repository repository, ContentValidator contentValidator) {
+        this.repository = repository;
+        this.contentValidator = contentValidator;
+    }
+
+    public Single<Boolean> execute(final String username, final String password) {
+        if (contentValidator.isEmptyString(username) || contentValidator.isEmptyString(password))
+            return Single.error(new ParameterEmptyException());
+
+        return repository.login(username, password);
+    }
+}

@@ -1,0 +1,15 @@
+<resources>
+    <!-- Button Styles -->
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+    </style>
+
+    <style name="ButtonStyle.NoRaise">
+    </style>
+
+    <style name="ButtonStyle.Colored" parent="Widget.AppCompat.Button.Colored">
+    </style>
+
+    <style name="ButtonStyle.Colored.NoRaise">
+    </style>
+
+</resources>

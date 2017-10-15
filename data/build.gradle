@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+
+apply from: "$rootProject.projectDir/libraries.gradle"
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+    lintOptions {
+        abortOnError false
+        disable 'InvalidPackage'  // Some libraries have issues with this
+    }
+    retrolambda {
+        jvmArgs '-noverify'
+    }
+}
+
+repositories {
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}
+
+dependencies {
+    compile project(':domain')
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.10.0'
+
+    androidTestCompile 'org.mockito:mockito-android:2.10.0'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'com.android.support.test:runner:1.0.1'
+
+    //Others
+    compile library.rxjava
+
+    compile library.okhttp_logging_interceptor
+    compile library.okhttp
+
+    compile library.retrofit
+    compile library.retrofit_converter_gson
+    compile library.retrofit_adapter_rxjava
+
+    compile library.dagger_compile
+    annotationProcessor library.dagger_apt
+
+    compile library.gson
+
+}

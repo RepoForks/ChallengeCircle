@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Challenge</string>
+
+    <string name="error_global">Error Occurred</string>
+    <string name="error_input_empty">Field Can\'t Be Empty</string>
+
+    <string name="login">Login</string>
+    <string name="login_username">Username</string>
+    <string name="login_username_hint">demo</string>
+    <string name="login_password">Password</string>
+    <string name="login_password_hint">demo</string>
+
+    <string name="profile_list">Profile List</string>
+    <string name="profile_detail">Profile Detail</string>
+    <string name="profile_detail_name">Name</string>
+    <string name="profile_detail_surname">Surname</string>
+    <string name="profile_detail_age">Age</string>
+    <string name="profile_detail_address">Address</string>
+    <string name="profile_detail_phone">Phone Number</string>
+    <string name="profile_detail_update">Update</string>
+
+</resources>
