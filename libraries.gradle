@@ -1,5 +1,5 @@
 ext.version = [
-        support               : "25.2.0",
+        support               : "26.1.0",
         support_multidex      : "1.0.0",
         rxjava                : "1.2.4",
         rxandroid             : "1.2.1",
