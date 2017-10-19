@@ -75,10 +75,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
 
     @Override protected void onDestroy() {
         super.onDestroy();
-        if (isFinishing()) // Not Orientation Change
-            presenter.destroy();
-        else
-            presenter.detachView();
+        presenter.destroy();
     }
 
     //region Loading, Content, Error

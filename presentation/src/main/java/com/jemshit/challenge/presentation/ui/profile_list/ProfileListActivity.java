@@ -78,10 +78,7 @@ public class ProfileListActivity extends AppCompatActivity implements ProfileLis
 
     @Override protected void onDestroy() {
         super.onDestroy();
-        if (isFinishing()) // Not Orientation Change
-            presenter.destroy();
-        else
-            presenter.detachView();
+        presenter.destroy();
     }
 
     @Override

@@ -53,10 +53,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override protected void onDestroy() {
         super.onDestroy();
-        if (isFinishing()) // Not Orientation Change
-            presenter.destroy();
-        else
-            presenter.detachView();
+        presenter.destroy();
     }
 
     private void login() {
