@@ -26,7 +26,6 @@ public class DateHelper {
             long ageEpoch = currentTimeEpoch - birthEpoch;
             return (int) (ageEpoch / 1000 / 60 / 60 / 24 / 365);
         } catch (ParseException e) {
-            e.printStackTrace();
             return 0;
         }
     }

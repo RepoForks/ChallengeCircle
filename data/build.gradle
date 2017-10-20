@@ -43,29 +43,30 @@ repositories {
 }
 
 dependencies {
-    compile project(':domain')
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.10.0'
+    implementation project(':domain')
 
-    androidTestCompile 'org.mockito:mockito-android:2.10.0'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    // Test Libraries
+    testCompileOnly libraries.junit
+    testCompileOnly libraries.mockito_core
+    androidTestCompile libraries.mockito_android
+    androidTestCompile(libraries.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'com.android.support.test:runner:1.0.1'
+    testCompileOnly libraries.support_test_runner
 
     //Others
-    compile library.rxjava
+    implementation libraries.rxjava
 
-    compile library.okhttp_logging_interceptor
-    compile library.okhttp
+    implementation libraries.okhttp_logging_interceptor
+    implementation libraries.okhttp
 
-    compile library.retrofit
-    compile library.retrofit_converter_gson
-    compile library.retrofit_adapter_rxjava
+    api libraries.retrofit
+    api libraries.retrofit_converter_gson
+    implementation libraries.retrofit_adapter_rxjava
 
-    compile library.dagger_compile
-    annotationProcessor library.dagger_apt
+    implementation libraries.dagger_compile
+    annotationProcessor libraries.dagger_apt
 
-    compile library.gson
+    implementation libraries.gson
 
 }

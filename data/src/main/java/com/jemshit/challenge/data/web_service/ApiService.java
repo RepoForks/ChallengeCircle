@@ -7,15 +7,15 @@ import com.jemshit.challenge.data.other.ConstantsWebService;
 
 import java.util.List;
 
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Single;
 
 public interface ApiService {
 
     @GET(ConstantsWebService.URL_LOGIN)
     Single<List<LoginResponseEntity>> login(@Query(ConstantsWebService.QUERY_LOGIN_USERNAME) String username,
-                                      @Query(ConstantsWebService.QUERY_LOGIN_PASSWORD) String password);
+                                            @Query(ConstantsWebService.QUERY_LOGIN_PASSWORD) String password);
 
     @GET(ConstantsWebService.URL_GET_PROFILE_LIST)
     Single<List<GetProfileListResponseEntity>> getProfileList(@Query(ConstantsWebService.QUERY_GET_PROFILE_LIST_TOKEN) String token);

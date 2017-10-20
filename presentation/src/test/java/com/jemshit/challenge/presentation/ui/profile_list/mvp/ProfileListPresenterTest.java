@@ -15,8 +15,9 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.Collections;
 
-import rx.Single;
-import rx.schedulers.Schedulers;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class ProfileListPresenterTest {
 
@@ -27,7 +28,7 @@ public class ProfileListPresenterTest {
 
     @Before
     public void setUp() throws Exception {
-        presenter = new ProfileListPresenter(getProfileList, Schedulers.immediate(), Schedulers.immediate());
+        presenter = new ProfileListPresenter(getProfileList, Schedulers.trampoline(), Schedulers.trampoline());
         presenter.attachView(view);
     }
 

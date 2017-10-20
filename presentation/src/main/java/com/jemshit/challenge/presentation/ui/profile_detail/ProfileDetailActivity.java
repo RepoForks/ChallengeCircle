@@ -14,6 +14,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.jemshit.challenge.domain.model.ProfileModel;
 import com.jemshit.challenge.presentation.R;
 import com.jemshit.challenge.presentation.ui.profile_detail.di.ProfileDetailActivityComponent;
@@ -57,7 +58,10 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
         presenter.attachView(this);
         String profileId = getIntent().getStringExtra("profileId");
         String profileImageUrl = getIntent().getStringExtra("profileImageUrl");
-        Glide.with(this).load(profileImageUrl).centerCrop().into(imageProfile);
+        Glide.with(this)
+                .load(profileImageUrl)
+                .apply(RequestOptions.centerCropTransform())
+                .into(imageProfile);
 
         // Toolbar
         setSupportActionBar(toolbar);

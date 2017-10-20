@@ -14,8 +14,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import rx.Single;
-import rx.observers.TestSubscriber;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
 
 public class GetProfileByIdTest {
 
@@ -31,15 +31,15 @@ public class GetProfileByIdTest {
     @Test
     public void execute_shouldReturnErrorOnEmptyProfileId() throws Exception {
         // Assign
-        TestSubscriber<ProfileModel> testSubscriber = new TestSubscriber<>();
+        TestObserver<ProfileModel> testObserver = new TestObserver<>();
 
         // Act
         getProfileById.execute("")
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoValues();
-        testSubscriber.assertError(ParameterEmptyException.class);
+        testObserver.assertNoValues();
+        testObserver.assertError(ParameterEmptyException.class);
     }
 
     @Test

@@ -5,8 +5,8 @@ import com.jemshit.challenge.domain.interactor.Login;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import rx.Scheduler;
-import rx.Subscription;
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.Disposable;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
@@ -14,7 +14,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     private Login loginUseCase;
     private Scheduler subscribeOnScheduler;
     private Scheduler observeOnScheduler;
-    private Subscription subscription;
+    private Disposable disposable;
 
     @Inject
     public LoginPresenter(Login loginUseCase, @Named("IoWorkScheduler") Scheduler subscribeOnScheduler,
@@ -26,10 +26,10 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(String username, String password) {
-        subscription = loginUseCase.execute(username, password)
+        disposable = loginUseCase.execute(username, password)
                 .subscribeOn(subscribeOnScheduler)
                 .observeOn(observeOnScheduler)
-                .doOnSubscribe(() -> {
+                .doOnSubscribe(disposable1 -> {
                     if (isViewAttached()) view.showLoading();
                 })
                 .subscribe(
@@ -65,7 +65,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void destroy() {
         detachView();
-        if (subscription != null && !subscription.isUnsubscribed())
-            subscription.unsubscribe();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

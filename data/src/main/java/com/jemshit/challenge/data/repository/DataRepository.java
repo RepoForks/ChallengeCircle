@@ -12,7 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Single;
+import io.reactivex.Single;
 
 @Singleton
 public class DataRepository implements Repository {
@@ -30,7 +30,7 @@ public class DataRepository implements Repository {
 
     @Override public Single<Boolean> login(String username, String password) {
         return dataSourceFactory.getRemoteDataSource().login(username, password)
-                .map(loginResponseEntity -> loginResponseEntity != null);
+                .map(loginResponseEntity -> loginResponseEntity.getToken()!=null);
     }
 
     @Override public Single<List<UserModel>> getProfileList(String token) {

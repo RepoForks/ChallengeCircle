@@ -69,39 +69,35 @@ android {
 // Dependencies
 dependencies {
     // Modules and .jar libraries
-    compile project(':domain')
-    compile project(':data')
+    implementation project(':domain')
+    implementation project(':data')
 
     //Test Libraries
-    androidTestCompile 'org.mockito:mockito-android:2.10.0'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestCompileOnly libraries.mockito_android
+    androidTestCompileOnly(libraries.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.10.0'
+    testCompileOnly libraries.junit
+    testCompileOnly libraries.mockito_core
 
     // Other Libraries
-    compile library.support_appcompat_v7
-    compile library.support_v4
-    compile library.support_design
-    compile library.support_recyclerview
+    implementation libraries.support_appcompat_v7
+    implementation libraries.support_v4
+    implementation libraries.support_design
+    implementation libraries.support_recyclerview
 
-    compile library.rxjava
-    compile library.rxbinding
-    compile library.rxandroid
-    compile library.rxbinding_appcompat_v7
-    compile library.rxbinding_support_v4
+    implementation libraries.rxjava
+    implementation libraries.rxandroid
 
-    compile library.dagger_compile
-    annotationProcessor library.dagger_apt
-    compile library.butterknife_compile
-    annotationProcessor library.butterknife_annotation_processor
+    implementation libraries.dagger_compile
+    annotationProcessor libraries.dagger_apt
+    implementation libraries.butterknife_compile
+    annotationProcessor libraries.butterknife_annotation_processor
 
-    compile library.material_dimen
-    compile library.glide
-    compile library.glide_transformations
-    compile library.materialish_progress
+    implementation libraries.material_dimen
+    implementation libraries.glide
+    implementation libraries.materialish_progress
 
-    compile library.inject_dagger_common
+    implementation libraries.inject_dagger_common
 
 }

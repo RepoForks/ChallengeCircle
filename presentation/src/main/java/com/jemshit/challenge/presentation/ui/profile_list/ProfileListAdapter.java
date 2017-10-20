@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.jemshit.challenge.domain.model.UserModel;
 import com.jemshit.challenge.presentation.R;
 
@@ -43,8 +44,8 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
 
         Glide.with(context)
                 .load(model.getPictureUrl())
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(RequestOptions.centerCropTransform())
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
                 .into(holder.imageProfile);
 
         holder.textFullname.setText(model.getProfileFullname());

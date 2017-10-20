@@ -14,8 +14,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import rx.Single;
-import rx.schedulers.Schedulers;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 public class ProfileDetailPresenterTest {
 
@@ -26,7 +26,7 @@ public class ProfileDetailPresenterTest {
 
     @Before
     public void setUp() throws Exception {
-        presenter = new ProfileDetailPresenter(getProfileById, Schedulers.immediate(), Schedulers.immediate());
+        presenter = new ProfileDetailPresenter(getProfileById, Schedulers.trampoline(), Schedulers.trampoline());
         presenter.attachView(view);
     }
 

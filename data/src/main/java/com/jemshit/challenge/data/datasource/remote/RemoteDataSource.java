@@ -18,7 +18,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import rx.Single;
+import io.reactivex.Single;
+
 
 @Singleton
 public class RemoteDataSource implements DataSource {
@@ -38,11 +39,11 @@ public class RemoteDataSource implements DataSource {
                     if (loginResponseEntity != null && loginResponseEntity.size() > 0)
                         return loginResponseEntity.get(0);
                     else
-                        return null;
+                        return new LoginResponseEntity();
                 })
                 // Save to Cache
                 .doOnSuccess(loginResponseEntity -> {
-                    if (loginResponseEntity != null)
+                    if (loginResponseEntity.getToken() != null)
                         cache.putInfinite("token", loginResponseEntity.getToken(), String.class);
                 });
     }

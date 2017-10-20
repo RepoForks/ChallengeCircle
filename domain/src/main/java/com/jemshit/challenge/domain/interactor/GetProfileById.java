@@ -8,7 +8,7 @@ import com.jemshit.challenge.domain.repository.Repository;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Single;
+import io.reactivex.Single;
 
 @Singleton
 public class GetProfileById {

@@ -18,13 +18,13 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.jemshit.challenge.data.other.ConstantsWebService.BUILD_CONFIG_DEBUG;
 
 @Module
-public class NetModule {
+public class NetworkModule {
 
     private static final int DISK_CACHE_SIZE = 15 * 1024 * 1024; //15 mb
     private static final int NETWORK_TIMEOUT = 20; //20 seconds
@@ -66,7 +66,7 @@ public class NetModule {
                 .client(client)
                 .baseUrl(ConstantsWebService.BASE_URL_WEB_SERVICE)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 }

@@ -1,10 +1,10 @@
 package com.jemshit.challenge.data.datasource.local;
 
-import com.jemshit.challenge.data.test_helper.DataGenerator;
 import com.jemshit.challenge.data.datasource.cache.Cache;
 import com.jemshit.challenge.data.entity.web_responses.LoginResponseEntity;
 import com.jemshit.challenge.data.entity.web_responses.ProfileEntity;
 import com.jemshit.challenge.data.entity.web_responses.UserEntity;
+import com.jemshit.challenge.data.test_helper.DataGenerator;
 
 import junit.framework.Assert;
 
@@ -19,7 +19,8 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.List;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
+
 
 public class LocalDataSourceTest {
 
@@ -36,20 +37,20 @@ public class LocalDataSourceTest {
 
     //region Get Token
     @Test
-    public void login_shouldAlwaysReturnNull() throws Exception {
+    public void login_shouldAlwaysReturnEmpty() throws Exception {
         // Assign
-        TestSubscriber<LoginResponseEntity> testSubscriber = new TestSubscriber<>();
+        TestObserver<LoginResponseEntity> testObserver = new TestObserver<>();
         String USERNAME = "username";
         String PASSWORD = "password";
 
         // Act
         localDataSource.login(USERNAME, PASSWORD)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(null);
-        testSubscriber.assertCompleted();
+        testObserver.assertValueCount(1);
+        testObserver.assertComplete();
+        testObserver.assertNoErrors();
     }
     //endregion
 
@@ -71,17 +72,17 @@ public class LocalDataSourceTest {
         Mockito.doReturn(userEntityList)
                 .when(cache)
                 .getList(ArgumentMatchers.anyString(), ArgumentMatchers.any());
-        TestSubscriber<List<UserEntity>> testSubscriber = new TestSubscriber<>();
+        TestObserver<List<UserEntity>> testObserver = new TestObserver<>();
 
         // Act
         localDataSource.getProfileList(TOKEN)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(userEntityList);
-        testSubscriber.assertCompleted();
+        testObserver.assertNoErrors();
+        testObserver.assertValueCount(1);
+        testObserver.assertValue(userEntityList);
+        testObserver.assertComplete();
     }
     //endregion
 
@@ -103,17 +104,17 @@ public class LocalDataSourceTest {
         Mockito.doReturn(profileEntity)
                 .when(cache)
                 .get(ArgumentMatchers.anyString(), ArgumentMatchers.any());
-        TestSubscriber<ProfileEntity> testSubscriber = new TestSubscriber<>();
+        TestObserver<ProfileEntity> testObserver = new TestObserver<>();
 
         // Act
         localDataSource.getProfile(PROFILE_ID)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(profileEntity);
-        testSubscriber.assertCompleted();
+        testObserver.assertNoErrors();
+        testObserver.assertValueCount(1);
+        testObserver.assertValue(profileEntity);
+        testObserver.assertComplete();
     }
     //endregion
 

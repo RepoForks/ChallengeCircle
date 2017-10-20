@@ -19,8 +19,9 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.Collections;
 
-import rx.Single;
-import rx.observers.TestSubscriber;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
+
 
 public class DataRepositoryTest {
 
@@ -62,17 +63,17 @@ public class DataRepositoryTest {
         Mockito.when(dataSourceFactory.getRemoteDataSource())
                 .thenReturn(remoteDataSource);
         Mockito.when(remoteDataSource.login(USERNAME, PASSWORD))
-                .thenReturn(Single.just(new LoginResponseEntity()));
-        TestSubscriber<Boolean> testSubscriber = new TestSubscriber<>();
+                .thenReturn(Single.just(new LoginResponseEntity("", "", "")));
+        TestObserver<Boolean> testObserver = new TestObserver<>();
 
         // Act
         dataRepository.login(USERNAME, PASSWORD)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValue(true);
-        testSubscriber.assertCompleted();
+        testObserver.assertNoErrors();
+        testObserver.assertValue(true);
+        testObserver.assertComplete();
     }
 
     @Test
@@ -81,17 +82,17 @@ public class DataRepositoryTest {
         Mockito.when(dataSourceFactory.getRemoteDataSource())
                 .thenReturn(remoteDataSource);
         Mockito.when(remoteDataSource.login(USERNAME, PASSWORD))
-                .thenReturn(Single.just(null));
-        TestSubscriber<Boolean> testSubscriber = new TestSubscriber<>();
+                .thenReturn(Single.just(new LoginResponseEntity()));
+        TestObserver<Boolean> testObserver = new TestObserver<>();
 
         // Act
         dataRepository.login(USERNAME, PASSWORD)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValue(false);
-        testSubscriber.assertCompleted();
+        testObserver.assertNoErrors();
+        testObserver.assertValue(false);
+        testObserver.assertComplete();
     }
     //endregion
 
@@ -129,7 +130,9 @@ public class DataRepositoryTest {
                 .thenReturn(Single.just(new ProfileEntity()));
 
         // Act
-        dataRepository.getProfile(PROFILE_ID).subscribe();
+        dataRepository.getProfile(PROFILE_ID).subscribe((profileModel, throwable) -> {
+            //
+        });
 
         // Assert
         Mockito.verify(dataSourceFactory).getDataSourceForProfile(PROFILE_ID);

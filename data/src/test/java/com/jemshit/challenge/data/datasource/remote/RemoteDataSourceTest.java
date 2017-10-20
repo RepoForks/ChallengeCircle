@@ -1,12 +1,12 @@
 package com.jemshit.challenge.data.datasource.remote;
 
-import com.jemshit.challenge.data.test_helper.DataGenerator;
 import com.jemshit.challenge.data.datasource.cache.Cache;
 import com.jemshit.challenge.data.entity.web_responses.GetProfileListResponseEntity;
 import com.jemshit.challenge.data.entity.web_responses.LoginResponseEntity;
 import com.jemshit.challenge.data.entity.web_responses.ProfileEntity;
 import com.jemshit.challenge.data.entity.web_responses.UserEntity;
 import com.jemshit.challenge.data.exception.FetchDataException;
+import com.jemshit.challenge.data.test_helper.DataGenerator;
 import com.jemshit.challenge.data.web_service.ApiService;
 
 import junit.framework.Assert;
@@ -23,8 +23,9 @@ import org.mockito.junit.MockitoRule;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Single;
-import rx.observers.TestSubscriber;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
+
 
 public class RemoteDataSourceTest {
 
@@ -71,17 +72,17 @@ public class RemoteDataSourceTest {
         responseEntityList.add(loginResponseEntity);
         Mockito.when(apiService.login(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<LoginResponseEntity> testSubscriber = new TestSubscriber<>();
+        TestObserver<LoginResponseEntity> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.login(USERNAME, PASSWORD)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(loginResponseEntity);
-        testSubscriber.assertCompleted();
+        testObserver.assertNoErrors();
+        testObserver.assertValueCount(1);
+        testObserver.assertValue(loginResponseEntity);
+        testObserver.assertComplete();
     }
 
     @Test
@@ -100,22 +101,21 @@ public class RemoteDataSourceTest {
     }
 
     @Test
-    public void login_errorShouldReturnNull() throws Exception {
+    public void login_errorShouldReturnEmpty() throws Exception {
         // Assign
         List<LoginResponseEntity> responseEntityList = new ArrayList<>(0);
         Mockito.when(apiService.login(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<LoginResponseEntity> testSubscriber = new TestSubscriber<>();
+        TestObserver<LoginResponseEntity> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.login(USERNAME, PASSWORD)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(null);
-        testSubscriber.assertCompleted();
-        testSubscriber.assertNoErrors();
+        testObserver.assertValueCount(1);
+        testObserver.assertComplete();
+        testObserver.assertNoErrors();
     }
     //endregion
 
@@ -150,17 +150,17 @@ public class RemoteDataSourceTest {
         responseEntityList.add(new GetProfileListResponseEntity(userEntityList));
         Mockito.when(apiService.getProfileList(TOKEN))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<List<UserEntity>> testSubscriber = new TestSubscriber<>();
+        TestObserver<List<UserEntity>> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.getProfileList(TOKEN)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(userEntityList);
-        testSubscriber.assertCompleted();
+        testObserver.assertNoErrors();
+        testObserver.assertValueCount(1);
+        testObserver.assertValue(userEntityList);
+        testObserver.assertComplete();
     }
 
     @Test
@@ -169,11 +169,11 @@ public class RemoteDataSourceTest {
         List<GetProfileListResponseEntity> responseEntityList = new ArrayList<>(0);
         Mockito.when(apiService.getProfileList(TOKEN))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<List<UserEntity>> testSubscriber = new TestSubscriber<>();
+        TestObserver<List<UserEntity>> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.getProfileList(TOKEN)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
         Mockito.verifyZeroInteractions(cache);
@@ -185,16 +185,16 @@ public class RemoteDataSourceTest {
         List<GetProfileListResponseEntity> responseEntityList = new ArrayList<>(0);
         Mockito.when(apiService.getProfileList(TOKEN))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<List<UserEntity>> testSubscriber = new TestSubscriber<>();
+        TestObserver<List<UserEntity>> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.getProfileList(TOKEN)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNotCompleted();
-        testSubscriber.assertNoValues();
-        testSubscriber.assertError(FetchDataException.class);
+        testObserver.assertNotComplete();
+        testObserver.assertNoValues();
+        testObserver.assertError(FetchDataException.class);
     }
     //endregion
 
@@ -226,17 +226,17 @@ public class RemoteDataSourceTest {
         List<ProfileEntity> responseEntityList = DataGenerator.createProfileEntityList(true);
         Mockito.when(apiService.getProfile(PROFILE_ID))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<ProfileEntity> testSubscriber = new TestSubscriber<>();
+        TestObserver<ProfileEntity> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.getProfile(PROFILE_ID)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValueCount(1);
-        testSubscriber.assertValue(responseEntityList.get(0));
-        testSubscriber.assertCompleted();
+        testObserver.assertNoErrors();
+        testObserver.assertValueCount(1);
+        testObserver.assertValue(responseEntityList.get(0));
+        testObserver.assertComplete();
     }
 
     @Test
@@ -245,11 +245,11 @@ public class RemoteDataSourceTest {
         List<ProfileEntity> responseEntityList = DataGenerator.createProfileEntityList(false);
         Mockito.when(apiService.getProfile(PROFILE_ID))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<ProfileEntity> testSubscriber = new TestSubscriber<>();
+        TestObserver<ProfileEntity> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.getProfile(PROFILE_ID)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
         Mockito.verifyZeroInteractions(cache);
@@ -261,16 +261,16 @@ public class RemoteDataSourceTest {
         List<ProfileEntity> responseEntityList = DataGenerator.createProfileEntityList(false);
         Mockito.when(apiService.getProfile(PROFILE_ID))
                 .thenReturn(Single.just(responseEntityList));
-        TestSubscriber<ProfileEntity> testSubscriber = new TestSubscriber<>();
+        TestObserver<ProfileEntity> testObserver = new TestObserver<>();
 
         // Act
         remoteDataSource.getProfile(PROFILE_ID)
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNotCompleted();
-        testSubscriber.assertNoValues();
-        testSubscriber.assertError(FetchDataException.class);
+        testObserver.assertNotComplete();
+        testObserver.assertNoValues();
+        testObserver.assertError(FetchDataException.class);
     }
     //endregion
 

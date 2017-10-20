@@ -13,8 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import rx.Single;
-import rx.schedulers.Schedulers;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 public class LoginPresenterTest {
 
@@ -25,7 +25,7 @@ public class LoginPresenterTest {
 
     @Before
     public void setUp() throws Exception {
-        presenter = new LoginPresenter(loginUseCase, Schedulers.immediate(), Schedulers.immediate());
+        presenter = new LoginPresenter(loginUseCase, Schedulers.trampoline(), Schedulers.trampoline());
         presenter.attachView(view);
     }
 

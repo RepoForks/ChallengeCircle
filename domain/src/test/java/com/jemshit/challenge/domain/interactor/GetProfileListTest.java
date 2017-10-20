@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.Collections;
 
-import rx.Single;
+import io.reactivex.Single;
 
 public class GetProfileListTest {
 

@@ -6,7 +6,7 @@ import com.jemshit.challenge.data.entity.web_responses.UserEntity;
 
 import java.util.List;
 
-import rx.Single;
+import io.reactivex.Single;
 
 public interface DataSource {
 

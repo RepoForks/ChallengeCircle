@@ -5,8 +5,8 @@ import com.jemshit.challenge.domain.interactor.GetProfileList;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import rx.Scheduler;
-import rx.Subscription;
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.Disposable;
 
 public class ProfileListPresenter implements ProfileListContract.Presenter {
 
@@ -14,7 +14,7 @@ public class ProfileListPresenter implements ProfileListContract.Presenter {
     private GetProfileList getProfileList;
     private Scheduler subscribeOnScheduler;
     private Scheduler observeOnScheduler;
-    private Subscription subscription;
+    private Disposable disposable;
 
     @Inject
     public ProfileListPresenter(GetProfileList getProfileList, @Named("IoWorkScheduler") Scheduler subscribeOnScheduler,
@@ -26,10 +26,10 @@ public class ProfileListPresenter implements ProfileListContract.Presenter {
 
     @Override
     public void getProfileList() {
-        subscription = getProfileList.execute()
+        disposable = getProfileList.execute()
                 .subscribeOn(subscribeOnScheduler)
                 .observeOn(observeOnScheduler)
-                .doOnSubscribe(() -> {
+                .doOnSubscribe(disposable1 -> {
                     if (isViewAttached()) view.showLoading();
                 })
                 .subscribe(
@@ -59,7 +59,7 @@ public class ProfileListPresenter implements ProfileListContract.Presenter {
     @Override
     public void destroy() {
         detachView();
-        if (subscription != null && !subscription.isUnsubscribed())
-            subscription.unsubscribe();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

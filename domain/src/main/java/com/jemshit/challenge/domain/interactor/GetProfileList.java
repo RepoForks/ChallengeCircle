@@ -8,7 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Single;
+import io.reactivex.Single;
 
 @Singleton
 public class GetProfileList {

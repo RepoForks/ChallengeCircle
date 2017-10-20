@@ -5,7 +5,7 @@ import com.jemshit.challenge.domain.model.UserModel;
 
 import java.util.List;
 
-import rx.Single;
+import io.reactivex.Single;
 
 public interface Repository {
 

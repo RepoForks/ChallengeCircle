@@ -15,7 +15,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import rx.Single;
+import io.reactivex.Single;
+
 
 @Singleton
 public class LocalDataSource implements DataSource {
@@ -29,17 +30,23 @@ public class LocalDataSource implements DataSource {
 
     @Override public Single<LoginResponseEntity> login(String username, String password) {
         // No Op on Disk
-        return Single.just(null);
+        return Single.just(new LoginResponseEntity());
     }
 
     @Override public Single<List<UserEntity>> getProfileList(String token) {
         Type listType = new TypeToken<ArrayList<UserEntity>>() {
         }.getType();
-        return Single.just(cache.getList("profileList", listType));
+        List<UserEntity> userEntityList = cache.getList("profileList", listType);
+        if (userEntityList == null)
+            userEntityList = new ArrayList<>(0);
+        return Single.just(userEntityList);
     }
 
     @Override public Single<ProfileEntity> getProfile(String profileId) {
-        return Single.just(cache.get(profileId, ProfileEntity.class));
+        ProfileEntity profileEntity = cache.get(profileId, ProfileEntity.class);
+        if (profileEntity == null)
+            profileEntity = new ProfileEntity();
+        return Single.just(profileEntity);
     }
 
     @Override public String getToken() {

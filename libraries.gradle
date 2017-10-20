@@ -1,69 +1,68 @@
 ext.version = [
         support               : "26.1.0",
-        support_multidex      : "1.0.0",
-        rxjava                : "1.2.4",
-        rxandroid             : "1.2.1",
-        rxbinding             : "1.0.0",
+        rxjava                : "2.1.5",
+        rxandroid             : "2.0.1",
         dagger                : "2.7",
         inject_dagger_common  : "0.3.0",
         javaxAnnotationVersion: '1.0',
         javaxInjectVersion    : '1',
-        retrofit              : "2.1.0",
-        butterknife           : "8.4.0",
+        retrofit              : "2.3.0",
+        butterknife           : "8.8.1",
         material_dimen        : "1.4",
-        glide                 : "3.7.0",
-        glide_transformations : "2.0.1",
-        logging_interceptor   : "3.5.0",
+        glide                 : "4.2.0",
+        logging_interceptor   : "3.9.0",
         recyclerview_binder   : "1.3.2",
         materialish_progress  : "1.7",
-        okhttp                : "3.5.0",
-        gson                  : "2.7",
+        okhttp                : "3.9.0",
+        gson                  : "2.8.2",
+
+        mockito               : "2.10.0",
+        junit                 : "4.12",
+        espresso              : "3.0.1",
+        support_test_runner   : "1.0.1"
 ]
 
 def version = ext.version;
-
-ext.library = [
+ext.libraries = [
         // Android Framework
         support_appcompat_v7            : "com.android.support:appcompat-v7:${version.support}",
         support_v4                      : "com.android.support:support-v4:${version.support}",
         support_design                  : "com.android.support:design:${version.support}",
         support_recyclerview            : "com.android.support:recyclerview-v7:${version.support}",
 
-        // RxJava
-        rxjava                          : "io.reactivex:rxjava:${version.rxjava}",
-        rxandroid                       : "io.reactivex:rxandroid:${version.rxandroid}",
-        rxbinding                       : "com.jakewharton.rxbinding:rxbinding:${version.rxbinding}",
-        rxbinding_appcompat_v7          : "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${version.rxbinding}",
-        rxbinding_support_v4            : "com.jakewharton.rxbinding:rxbinding-support-v4:${version.rxbinding}",
+        // RxJava 2
+        rxjava                          : "io.reactivex.rxjava2:rxjava:${version.rxjava}",
+        rxandroid                       : "io.reactivex.rxjava2:rxandroid:${version.rxandroid}",
 
         // Dagger 2
         dagger_compile                  : "com.google.dagger:dagger:${version.dagger}",
         dagger_apt                      : "com.google.dagger:dagger-compiler:${version.dagger}",
+        javaxAnnotation_provided        : "javax.annotation:jsr250-api:${version.javaxAnnotationVersion}",
+        javaxInject                     : "javax.inject:javax.inject:${version.javaxInjectVersion}",
+        inject_dagger_common            : "com.github.trevjonez:Inject-Android:${version.inject_dagger_common}",
 
         // Retrofit
         retrofit                        : "com.squareup.retrofit2:retrofit:${version.retrofit}",
         retrofit_converter_gson         : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
-        retrofit_adapter_rxjava         : "com.squareup.retrofit2:adapter-rxjava:${version.retrofit}",
+        retrofit_adapter_rxjava         : "com.squareup.retrofit2:adapter-rxjava2:${version.retrofit}",
         okhttp_logging_interceptor      : "com.squareup.okhttp3:logging-interceptor:${version.logging_interceptor}",
         okhttp                          : "com.squareup.okhttp3:okhttp:${version.okhttp}",
+        gson                            : "com.google.code.gson:gson:${version.gson}",
 
         // Butterknife
         butterknife_compile             : "com.jakewharton:butterknife:${version.butterknife}",
         butterknife_annotation_processor: "com.jakewharton:butterknife-compiler:${version.butterknife}",
 
-        // Material Dimens, Colors
         material_dimen                  : "com.dmitrymalkovich.android:material-design-dimens:${version.material_dimen}",
-
-        // Glide
         glide                           : "com.github.bumptech.glide:glide:${version.glide}",
-        glide_transformations           : "jp.wasabeef:glide-transformations:${version.glide_transformations}",
-
         recyclerview_binder             : "jp.satorufujiwara:recyclerview-binder:${version.recyclerview_binder}",
         materialish_progress            : "com.pnikosis:materialish-progress:${version.materialish_progress}",
 
-        gson                            : "com.google.code.gson:gson:${version.gson}",
-        javaxAnnotation_provided        : "javax.annotation:jsr250-api:${version.javaxAnnotationVersion}",
-        javaxInject                     : "javax.inject:javax.inject:${version.javaxInjectVersion}",
+        junit                           : "junit:junit:${version.junit}",
+        mockito_core                    : "org.mockito:mockito-core:${version.mockito}",
+        mockito_android                 : "org.mockito:mockito-android:${version.mockito}",
+        espresso                        : "com.android.support.test.espresso:espresso-core:${version.espresso}",
+        support_test_runner             : "com.android.support.test:runner:${version.support_test_runner}"
 
-        inject_dagger_common            : "com.github.trevjonez:Inject-Android:${version.inject_dagger_common}",
 ]
+

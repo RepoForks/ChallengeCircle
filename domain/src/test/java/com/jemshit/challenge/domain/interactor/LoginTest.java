@@ -13,8 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import rx.Single;
-import rx.observers.TestSubscriber;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
 
 public class LoginTest {
 
@@ -30,29 +30,29 @@ public class LoginTest {
     @Test
     public void execute_shouldReturnErrorOnEmptyUsername() throws Exception {
         // Assign
-        TestSubscriber<Boolean> testSubscriber = new TestSubscriber<>();
+        TestObserver<Boolean> testObserver = new TestObserver<>();
 
         // Act
         login.execute("", "notEmpty")
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoValues();
-        testSubscriber.assertError(ParameterEmptyException.class);
+        testObserver.assertNoValues();
+        testObserver.assertError(ParameterEmptyException.class);
     }
 
     @Test
     public void execute_shouldReturnErrorOnEmptyPassword() throws Exception {
         // Assign
-        TestSubscriber<Boolean> testSubscriber = new TestSubscriber<>();
+        TestObserver<Boolean> testObserver = new TestObserver<>();
 
         // Act
         login.execute("notEmpty", "")
-                .subscribe(testSubscriber);
+                .subscribe(testObserver);
 
         // Assert
-        testSubscriber.assertNoValues();
-        testSubscriber.assertError(ParameterEmptyException.class);
+        testObserver.assertNoValues();
+        testObserver.assertError(ParameterEmptyException.class);
     }
 
     @Test

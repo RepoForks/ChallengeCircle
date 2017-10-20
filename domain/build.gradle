@@ -34,12 +34,12 @@ android {
 
 dependencies {
     // Test
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.10.0'
+    testCompileOnly libraries.junit
+    testCompileOnly libraries.mockito_core
 
     // Others
-    provided library.javaxAnnotation_provided
-    compile library.javaxInject
+    compileOnly libraries.javaxAnnotation_provided
+    implementation libraries.javaxInject
 
-    compile library.rxjava
+    implementation libraries.rxjava
 }
