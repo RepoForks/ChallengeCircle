@@ -34,8 +34,8 @@ android {
 
 dependencies {
     // Test
-    testCompileOnly libraries.junit
-    testCompileOnly libraries.mockito_core
+    testImplementation libraries.junit
+    testImplementation libraries.mockito_core
 
     // Others
     compileOnly libraries.javaxAnnotation_provided

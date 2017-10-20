@@ -46,13 +46,13 @@ dependencies {
     implementation project(':domain')
 
     // Test Libraries
-    testCompileOnly libraries.junit
-    testCompileOnly libraries.mockito_core
+    testImplementation libraries.junit
+    testImplementation libraries.mockito_core
     androidTestImplementation libraries.mockito_android
     androidTestImplementation(libraries.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompileOnly libraries.support_test_runner
+    testImplementation libraries.support_test_runner
 
     //Others
     implementation libraries.rxjava

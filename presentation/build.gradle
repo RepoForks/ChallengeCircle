@@ -26,8 +26,8 @@ android {
     buildTypes {
         release {
             debuggable false
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
@@ -84,8 +84,8 @@ dependencies {
     androidTestImplementation(libraries.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompileOnly libraries.junit
-    testCompileOnly libraries.mockito_core
+    testImplementation libraries.junit
+    testImplementation libraries.mockito_core
 
     // Other Libraries
     implementation libraries.support_appcompat_v7
