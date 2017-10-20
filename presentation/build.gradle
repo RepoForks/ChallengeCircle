@@ -73,8 +73,8 @@ dependencies {
     implementation project(':data')
 
     //Test Libraries
-    androidTestCompileOnly libraries.mockito_android
-    androidTestCompileOnly(libraries.espresso, {
+    androidTestImplementation libraries.mockito_android
+    androidTestImplementation(libraries.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompileOnly libraries.junit

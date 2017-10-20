@@ -48,8 +48,8 @@ dependencies {
     // Test Libraries
     testCompileOnly libraries.junit
     testCompileOnly libraries.mockito_core
-    androidTestCompile libraries.mockito_android
-    androidTestCompile(libraries.espresso, {
+    androidTestImplementation libraries.mockito_android
+    androidTestImplementation(libraries.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompileOnly libraries.support_test_runner
