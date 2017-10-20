@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
 
 apply from: "$rootProject.projectDir/libraries.gradle"
 
@@ -58,12 +59,18 @@ android {
     }
 
     packagingOptions {
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/*'
     }
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'
     }
+}
+
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled true
+    xml.enabled true
 }
 
 // Dependencies
