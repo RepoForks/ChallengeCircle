@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'jacoco-android'
 
 apply from: "$rootProject.projectDir/libraries.gradle"
 
@@ -35,11 +36,10 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url 'https://maven.google.com/'
-        name 'Google'
-    }
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled true
+    xml.enabled true
 }
 
 dependencies {

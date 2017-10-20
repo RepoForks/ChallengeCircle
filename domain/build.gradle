@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'jacoco-android'
 
 apply from: "$rootProject.projectDir/libraries.gradle"
 
@@ -30,6 +31,12 @@ android {
         abortOnError false
         disable 'InvalidPackage'
     }
+}
+
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled true
+    xml.enabled true
 }
 
 dependencies {
