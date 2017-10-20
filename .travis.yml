@@ -1,4 +1,5 @@
 language: android
+jdk: oraclejdk8
 android:
   components:
     # Uncomment the lines below if you want to
@@ -34,3 +35,10 @@ cache:
       - $HOME/.gradle/caches/
       - $HOME/.gradle/wrapper/
         - $HOME/.android/build-cache
+
+# CodeCoverage report
+script:
+  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - ./gradlew connectedCheck
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
