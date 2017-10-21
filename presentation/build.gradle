@@ -99,6 +99,7 @@ dependencies {
     implementation libraries.dagger
     annotationProcessor libraries.dagger_apt
     implementation libraries.dagger_android
+    annotationProcessor libraries.dagger_android_apt
 
     implementation libraries.butterknife
     annotationProcessor libraries.butterknife_apt
