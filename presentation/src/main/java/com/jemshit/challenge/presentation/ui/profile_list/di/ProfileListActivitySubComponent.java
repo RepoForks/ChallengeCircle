@@ -4,21 +4,18 @@ import com.jemshit.challenge.presentation.di.scope.ActivityScope;
 import com.jemshit.challenge.presentation.ui.profile_list.ProfileListActivity;
 import com.jemshit.challenge.presentation.ui.profile_list.mvp.ProfileListContract;
 import com.jemshit.challenge.presentation.ui.profile_list.mvp.ProfileListPresenter;
-import com.trevjonez.inject.PlainComponent;
-import com.trevjonez.inject.activity.ActivityComponentBuilder;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.Subcomponent;
+import dagger.android.AndroidInjector;
 
 @ActivityScope
-@Subcomponent(modules = {
-        ProfileListActivityComponent.BindsModule.class
-})
-public interface ProfileListActivityComponent extends PlainComponent<ProfileListActivity> {
+@Subcomponent(modules = ProfileListActivitySubComponent.BindsModule.class)
+public interface ProfileListActivitySubComponent extends AndroidInjector<ProfileListActivity> {
 
     @Subcomponent.Builder
-    interface Builder extends ActivityComponentBuilder<ProfileListActivity, ProfileListActivityComponent> {
+    abstract class Builder extends AndroidInjector.Builder<ProfileListActivity> {
     }
 
     @Module

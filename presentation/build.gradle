@@ -93,18 +93,16 @@ dependencies {
     implementation libraries.support_design
     implementation libraries.support_recyclerview
 
-    implementation libraries.rxjava
-    implementation libraries.rxandroid
+    implementation libraries.rxjava2
+    implementation libraries.rxandroid2
 
-    implementation libraries.dagger_compile
+    implementation libraries.dagger
     annotationProcessor libraries.dagger_apt
-    implementation libraries.butterknife_compile
-    annotationProcessor libraries.butterknife_annotation_processor
+    implementation libraries.dagger_android
 
+    implementation libraries.butterknife
+    annotationProcessor libraries.butterknife_apt
     implementation libraries.material_dimen
     implementation libraries.glide
     implementation libraries.materialish_progress
-
-    implementation libraries.inject_dagger_common
-
 }

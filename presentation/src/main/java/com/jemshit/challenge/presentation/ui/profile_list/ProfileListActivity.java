@@ -21,9 +21,7 @@ import android.widget.ViewFlipper;
 import com.jemshit.challenge.domain.model.UserModel;
 import com.jemshit.challenge.presentation.R;
 import com.jemshit.challenge.presentation.ui.profile_detail.ProfileDetailActivity;
-import com.jemshit.challenge.presentation.ui.profile_list.di.ProfileListActivityComponent;
 import com.jemshit.challenge.presentation.ui.profile_list.mvp.ProfileListContract;
-import com.trevjonez.inject.activity.ActivityComponentBuilderHost;
 
 import java.util.List;
 
@@ -31,6 +29,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 public class ProfileListActivity extends AppCompatActivity implements ProfileListContract.View, ItemClickListener {
 
@@ -45,15 +44,9 @@ public class ProfileListActivity extends AppCompatActivity implements ProfileLis
     private ProfileListAdapter adapter;
     //endregion
 
-    private void setupDaggerComponent(ActivityComponentBuilderHost activityComponentBuilderHost) {
-        activityComponentBuilderHost
-                .getActivityComponentBuilder(ProfileListActivity.class, ProfileListActivityComponent.Builder.class)
-                .build().inject(this);
-    }
-
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        setupDaggerComponent((ActivityComponentBuilderHost) getApplication());
         setContentView(R.layout.activity_profile_list);
         ButterKnife.bind(this);
         presenter.attachView(this);

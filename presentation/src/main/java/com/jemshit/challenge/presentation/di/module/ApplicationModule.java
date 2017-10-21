@@ -15,15 +15,10 @@ import io.reactivex.schedulers.Schedulers;
 
 @Module
 public class ApplicationModule {
-    private final ChallengeApplication application;
-
-    public ApplicationModule(ChallengeApplication application) {
-        this.application = application;
-    }
 
     @Provides @Singleton @Named("AppContext")
-    Context provideApplicationContext() {
-        return this.application;
+    Context provideApplicationContext(ChallengeApplication application) {
+        return application;
     }
 
     @Provides @Singleton @Named("IoWorkScheduler")

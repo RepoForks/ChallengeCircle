@@ -2,8 +2,7 @@ ext.version = [
         support               : "26.1.0",
         rxjava                : "2.1.5",
         rxandroid             : "2.0.1",
-        dagger                : "2.7",
-        inject_dagger_common  : "0.3.0",
+        dagger                : "2.12",
         javaxAnnotationVersion: '1.0',
         javaxInjectVersion    : '1',
         retrofit              : "2.3.0",
@@ -22,47 +21,52 @@ ext.version = [
         support_test_runner   : "1.0.1"
 ]
 
-def version = ext.version;
+def version = ext.version
+
 ext.libraries = [
         // Android Framework
-        support_appcompat_v7            : "com.android.support:appcompat-v7:${version.support}",
-        support_v4                      : "com.android.support:support-v4:${version.support}",
-        support_design                  : "com.android.support:design:${version.support}",
-        support_recyclerview            : "com.android.support:recyclerview-v7:${version.support}",
+        support_appcompat_v7       : "com.android.support:appcompat-v7:${version.support}",
+        support_v4                 : "com.android.support:support-v4:${version.support}",
+        support_design             : "com.android.support:design:${version.support}",
+        support_recyclerview       : "com.android.support:recyclerview-v7:${version.support}",
 
         // RxJava 2
-        rxjava                          : "io.reactivex.rxjava2:rxjava:${version.rxjava}",
-        rxandroid                       : "io.reactivex.rxjava2:rxandroid:${version.rxandroid}",
+        rxjava2                    : "io.reactivex.rxjava2:rxjava:${version.rxjava}",
+        rxandroid2                 : "io.reactivex.rxjava2:rxandroid:${version.rxandroid}",
 
         // Dagger 2
-        dagger_compile                  : "com.google.dagger:dagger:${version.dagger}",
-        dagger_apt                      : "com.google.dagger:dagger-compiler:${version.dagger}",
-        javaxAnnotation_provided        : "javax.annotation:jsr250-api:${version.javaxAnnotationVersion}",
-        javaxInject                     : "javax.inject:javax.inject:${version.javaxInjectVersion}",
-        inject_dagger_common            : "com.github.trevjonez:Inject-Android:${version.inject_dagger_common}",
+        dagger                     : "com.google.dagger:dagger:${version.dagger}",
+        dagger_apt                 : "com.google.dagger:dagger-compiler:${version.dagger}",
+        dagger_android             : "com.google.dagger:dagger-android:${version.dagger}",
+        dagger_android_support     : "com.google.dagger:dagger-android-support:${version.dagger}",
+        dagger_android_apt         : "com.google.dagger:dagger-android-processor:${version.dagger}",
+
+        javaxAnnotation_compileonly: "javax.annotation:jsr250-api:${version.javaxAnnotationVersion}",
+        javaxInject                : "javax.inject:javax.inject:${version.javaxInjectVersion}",
 
         // Retrofit
-        retrofit                        : "com.squareup.retrofit2:retrofit:${version.retrofit}",
-        retrofit_converter_gson         : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
-        retrofit_adapter_rxjava         : "com.squareup.retrofit2:adapter-rxjava2:${version.retrofit}",
-        okhttp_logging_interceptor      : "com.squareup.okhttp3:logging-interceptor:${version.logging_interceptor}",
-        okhttp                          : "com.squareup.okhttp3:okhttp:${version.okhttp}",
-        gson                            : "com.google.code.gson:gson:${version.gson}",
+        retrofit                   : "com.squareup.retrofit2:retrofit:${version.retrofit}",
+        retrofit_converter_gson    : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
+        retrofit_adapter_rxjava2   : "com.squareup.retrofit2:adapter-rxjava2:${version.retrofit}",
+        okhttp_logging_interceptor : "com.squareup.okhttp3:logging-interceptor:${version.logging_interceptor}",
+        okhttp                     : "com.squareup.okhttp3:okhttp:${version.okhttp}",
+        gson                       : "com.google.code.gson:gson:${version.gson}",
 
         // Butterknife
-        butterknife_compile             : "com.jakewharton:butterknife:${version.butterknife}",
-        butterknife_annotation_processor: "com.jakewharton:butterknife-compiler:${version.butterknife}",
+        butterknife                : "com.jakewharton:butterknife:${version.butterknife}",
+        butterknife_apt            : "com.jakewharton:butterknife-compiler:${version.butterknife}",
 
-        material_dimen                  : "com.dmitrymalkovich.android:material-design-dimens:${version.material_dimen}",
-        glide                           : "com.github.bumptech.glide:glide:${version.glide}",
-        recyclerview_binder             : "jp.satorufujiwara:recyclerview-binder:${version.recyclerview_binder}",
-        materialish_progress            : "com.pnikosis:materialish-progress:${version.materialish_progress}",
+        material_dimen             : "com.dmitrymalkovich.android:material-design-dimens:${version.material_dimen}",
+        glide                      : "com.github.bumptech.glide:glide:${version.glide}",
+        recyclerview_binder        : "jp.satorufujiwara:recyclerview-binder:${version.recyclerview_binder}",
+        materialish_progress       : "com.pnikosis:materialish-progress:${version.materialish_progress}",
 
-        junit                           : "junit:junit:${version.junit}",
-        mockito_core                    : "org.mockito:mockito-core:${version.mockito}",
-        mockito_android                 : "org.mockito:mockito-android:${version.mockito}",
-        espresso                        : "com.android.support.test.espresso:espresso-core:${version.espresso}",
-        support_test_runner             : "com.android.support.test:runner:${version.support_test_runner}"
+        // Test
+        junit                      : "junit:junit:${version.junit}",
+        mockito_core               : "org.mockito:mockito-core:${version.mockito}",
+        mockito_android            : "org.mockito:mockito-android:${version.mockito}",
+        espresso                   : "com.android.support.test.espresso:espresso-core:${version.espresso}",
+        support_test_runner        : "com.android.support.test:runner:${version.support_test_runner}"
 
 ]
 
