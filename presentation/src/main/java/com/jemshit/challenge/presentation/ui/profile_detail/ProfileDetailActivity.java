@@ -17,14 +17,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.jemshit.challenge.domain.model.ProfileModel;
 import com.jemshit.challenge.presentation.R;
-import com.jemshit.challenge.presentation.ui.profile_detail.di.ProfileDetailActivityComponent;
 import com.jemshit.challenge.presentation.ui.profile_detail.mvp.ProfileDetailContract;
-import com.trevjonez.inject.activity.ActivityComponentBuilderHost;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 public class ProfileDetailActivity extends AppCompatActivity implements ProfileDetailContract.View {
 
@@ -44,15 +43,9 @@ public class ProfileDetailActivity extends AppCompatActivity implements ProfileD
     @Inject ProfileDetailContract.Presenter presenter;
     //endregion
 
-    private void setupDaggerComponent(ActivityComponentBuilderHost activityComponentBuilderHost) {
-        activityComponentBuilderHost
-                .getActivityComponentBuilder(ProfileDetailActivity.class, ProfileDetailActivityComponent.Builder.class)
-                .build().inject(this);
-    }
-
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        setupDaggerComponent((ActivityComponentBuilderHost) getApplication());
         setContentView(R.layout.activity_profile_detail);
         ButterKnife.bind(this);
         presenter.attachView(this);

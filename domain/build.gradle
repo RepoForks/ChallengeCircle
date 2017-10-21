@@ -45,8 +45,7 @@ dependencies {
     testImplementation libraries.mockito_core
 
     // Others
-    compileOnly libraries.javaxAnnotation_provided
+    compileOnly libraries.javaxAnnotation_compileonly
     implementation libraries.javaxInject
-
-    implementation libraries.rxjava
+    implementation libraries.rxjava2
 }

@@ -55,18 +55,14 @@ dependencies {
     testImplementation libraries.support_test_runner
 
     //Others
-    implementation libraries.rxjava
-
-    implementation libraries.okhttp_logging_interceptor
-    implementation libraries.okhttp
-
+    implementation libraries.rxjava2
     api libraries.retrofit
     api libraries.retrofit_converter_gson
-    implementation libraries.retrofit_adapter_rxjava
-
-    implementation libraries.dagger_compile
-    annotationProcessor libraries.dagger_apt
-
     implementation libraries.gson
+    implementation libraries.okhttp_logging_interceptor
+    implementation libraries.okhttp
+    implementation libraries.retrofit_adapter_rxjava2
+    implementation libraries.dagger
+    annotationProcessor libraries.dagger_apt
 
 }

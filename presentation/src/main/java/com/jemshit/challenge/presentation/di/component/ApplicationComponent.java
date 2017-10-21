@@ -7,10 +7,10 @@ import com.jemshit.challenge.data.di.RepositoryModule;
 import com.jemshit.challenge.presentation.ChallengeApplication;
 import com.jemshit.challenge.presentation.di.module.AppScopeActivityBinders;
 import com.jemshit.challenge.presentation.di.module.ApplicationModule;
-import com.trevjonez.inject.PlainComponent;
 
 import javax.inject.Singleton;
 
+import dagger.BindsInstance;
 import dagger.Component;
 
 @Singleton
@@ -21,8 +21,18 @@ import dagger.Component;
                 DataModule.class,
                 NetworkModule.class,
                 RepositoryModule.class,
+
                 AppScopeActivityBinders.class
         }
 )
-public interface ApplicationComponent extends PlainComponent<ChallengeApplication> {
+public interface ApplicationComponent {
+
+    @Component.Builder
+    interface Builder {
+        ApplicationComponent build();
+
+        @BindsInstance Builder application(ChallengeApplication application);
+    }
+
+    void inject(ChallengeApplication application);
 }

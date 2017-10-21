@@ -10,17 +10,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jemshit.challenge.presentation.R;
-import com.jemshit.challenge.presentation.ui.login.di.LoginActivityComponent;
 import com.jemshit.challenge.presentation.ui.login.mvp.LoginContract;
 import com.jemshit.challenge.presentation.ui.profile_list.ProfileListActivity;
 import com.jemshit.challenge.presentation.validator.ViewValidator;
 import com.pnikosis.materialishprogress.ProgressWheel;
-import com.trevjonez.inject.activity.ActivityComponentBuilderHost;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
@@ -34,16 +33,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Inject ViewValidator viewValidator;
     //endregion
 
-    // Dagger son surumunde buna gerek kalmiyormus, daha denemedim hic
-    private void setupDaggerComponent(ActivityComponentBuilderHost activityComponentBuilderHost) {
-        activityComponentBuilderHost
-                .getActivityComponentBuilder(LoginActivity.class, LoginActivityComponent.Builder.class)
-                .build().inject(this);
-    }
-
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        setupDaggerComponent((ActivityComponentBuilderHost) getApplication());
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         presenter.attachView(this);
