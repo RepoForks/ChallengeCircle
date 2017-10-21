@@ -23,7 +23,7 @@ public class ChallengeApplication extends Application implements HasActivityInje
 
     private void setupDependencyInjection() {
         DaggerApplicationComponent.builder()
-                .application(this)
+                .bindInstanceApplication(this)
                 .build()
                 .inject(this);
     }

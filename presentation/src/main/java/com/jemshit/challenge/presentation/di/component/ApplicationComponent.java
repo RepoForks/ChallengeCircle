@@ -31,7 +31,7 @@ public interface ApplicationComponent {
     interface Builder {
         ApplicationComponent build();
 
-        @BindsInstance Builder application(ChallengeApplication application);
+        @BindsInstance Builder bindInstanceApplication(ChallengeApplication application);
     }
 
     void inject(ChallengeApplication application);
