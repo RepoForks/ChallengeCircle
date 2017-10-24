@@ -37,8 +37,9 @@ cache:
 
 # CodeCoverage report
 script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - ./gradlew connectedCheck
+  - ./gradlew clean
+  - ./gradlew clean build jacocoTestReport check
+  - ./gradlew check
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
