@@ -66,10 +66,10 @@ dependencies {
 
     //Others
     api dataDependencies.retrofit
-    api dataDependencies.retrofit_converter_gson
+    api dataDependencies.gson
 
     implementation dataDependencies.rxjava2
-    implementation dataDependencies.gson
+    implementation dataDependencies.retrofit_converter_gson
     implementation dataDependencies.okhttp_logging_interceptor
     implementation dataDependencies.okhttp
     implementation dataDependencies.retrofit_adapter_rxjava2
