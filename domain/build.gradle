@@ -1,8 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
-apply from: "$rootProject.projectDir/libraries.gradle"
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -22,12 +20,15 @@ jacocoTestReport {
 check.dependsOn jacocoTestReport
 
 dependencies {
+    def domainDependencies = rootProject.ext.domainDependencies
+    def domainTestDependencies = rootProject.ext.domainTestDependencies
+
     // Test
-    testImplementation libraries.junit
-    testImplementation libraries.mockito_core
+    testImplementation domainTestDependencies.junit
+    testImplementation domainTestDependencies.mockito_core
 
     // Others
-    compileOnly libraries.javaxAnnotation_compileonly
-    implementation libraries.javaxInject
-    implementation libraries.rxjava2
+    compileOnly domainDependencies.javaxAnnotation
+    implementation domainDependencies.javaxInject
+    implementation domainDependencies.rxjava2
 }

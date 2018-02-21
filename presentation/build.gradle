@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 
 apply from: "$rootProject.projectDir/keystore.gradle"
-apply from: "$rootProject.projectDir/libraries.gradle"
 
 // Android Configs
 android {
@@ -103,35 +102,36 @@ check.dependsOn jacocoTestReport
 
 // Dependencies
 dependencies {
-    // Modules and .jar libraries
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
     implementation project(':domain')
     implementation project(':data')
 
     //Test Libraries
-    androidTestImplementation libraries.mockito_android
-    androidTestImplementation(libraries.espresso, {
+    testImplementation presentationTestDependencies.junit
+    testImplementation presentationTestDependencies.mockito_core
+
+    androidTestImplementation presentationTestDependencies.mockito_android
+    androidTestImplementation(presentationTestDependencies.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation libraries.junit
-    testImplementation libraries.mockito_core
 
     // Other Libraries
-    implementation libraries.support_appcompat_v7
-    implementation libraries.support_v4
-    implementation libraries.support_design
-    implementation libraries.support_recyclerview
+    implementation presentationDependencies.support_appcompat_v7
+    implementation presentationDependencies.support_v4
+    implementation presentationDependencies.support_design
+    implementation presentationDependencies.support_recyclerview
+    implementation presentationDependencies.rxjava2
+    implementation presentationDependencies.rxandroid2
+    implementation presentationDependencies.dagger
+    implementation presentationDependencies.dagger_android
+    implementation presentationDependencies.butterknife
+    implementation presentationDependencies.material_dimen
+    implementation presentationDependencies.glide
+    implementation presentationDependencies.materialish_progress
 
-    implementation libraries.rxjava2
-    implementation libraries.rxandroid2
-
-    implementation libraries.dagger
-    annotationProcessor libraries.dagger_apt
-    implementation libraries.dagger_android
-    annotationProcessor libraries.dagger_android_apt
-
-    implementation libraries.butterknife
-    annotationProcessor libraries.butterknife_apt
-    implementation libraries.material_dimen
-    implementation libraries.glide
-    implementation libraries.materialish_progress
+    annotationProcessor presentationDependencies.dagger_apt
+    annotationProcessor presentationDependencies.dagger_android_apt
+    annotationProcessor presentationDependencies.butterknife_apt
 }

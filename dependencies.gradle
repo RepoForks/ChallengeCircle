@@ -1,0 +1,82 @@
+ext {
+    version = [
+            support               : "27.0.2",
+            rxjava2               : "2.1.6",
+            rxandroid             : "2.0.1",
+            dagger                : "2.12",
+            javaxAnnotationVersion: '1.0',
+            javaxInjectVersion    : '1',
+            retrofit              : "2.3.0",
+            butterknife           : "8.8.1",
+            material_dimen        : "1.4",
+            glide                 : "4.3.1",
+            recyclerview_binder   : "2.0.4",
+            materialish_progress  : "1.7",
+            okhttp                : "3.9.0",
+            gson                  : "2.8.2",
+
+            mockito               : "2.10.0",
+            junit                 : "4.12",
+            espresso              : "3.0.1",
+            support_test_runner   : "1.0.1"
+    ]
+
+    domainDependencies = [
+            javaxAnnotation: "javax.annotation:jsr250-api:${version.javaxAnnotationVersion}",
+            javaxInject    : "javax.inject:javax.inject:${version.javaxInjectVersion}",
+            rxjava2        : "io.reactivex.rxjava2:rxjava:${version.rxjava2}"
+    ]
+
+    domainTestDependencies = [
+            junit       : "junit:junit:${version.junit}",
+            mockito_core: "org.mockito:mockito-core:${version.mockito}"
+    ]
+
+    dataDependencies = [
+            rxjava2                   : "io.reactivex.rxjava2:rxjava:${version.rxjava2}",
+            retrofit                  : "com.squareup.retrofit2:retrofit:${version.retrofit}",
+            retrofit_converter_gson   : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
+            okhttp_logging_interceptor: "com.squareup.okhttp3:logging-interceptor:${version.okhttp}",
+            okhttp                    : "com.squareup.okhttp3:okhttp:${version.okhttp}",
+            gson                      : "com.google.code.gson:gson:${version.gson}",
+            dagger                    : "com.google.dagger:dagger:${version.dagger}",
+            dagger_apt                : "com.google.dagger:dagger-compiler:${version.dagger}",
+            retrofit_adapter_rxjava2  : "com.squareup.retrofit2:adapter-rxjava2:${version.retrofit}"
+    ]
+
+    dataTestDependencies = [
+            junit              : "junit:junit:${version.junit}",
+            mockito_core       : "org.mockito:mockito-core:${version.mockito}",
+            mockito_android    : "org.mockito:mockito-android:${version.mockito}",
+            espresso           : "com.android.support.test.espresso:espresso-core:${version.espresso}",
+            support_test_runner: "com.android.support.test:runner:${version.support_test_runner}"
+    ]
+
+    presentationDependencies = [
+            support_appcompat_v7: "com.android.support:appcompat-v7:${version.support}",
+            support_v4          : "com.android.support:support-v4:${version.support}",
+            support_design      : "com.android.support:design:${version.support}",
+            support_recyclerview: "com.android.support:recyclerview-v7:${version.support}",
+            rxjava2             : "io.reactivex.rxjava2:rxjava:${version.rxjava2}",
+            rxandroid2          : "io.reactivex.rxjava2:rxandroid:${version.rxandroid}",
+            dagger              : "com.google.dagger:dagger:${version.dagger}",
+            dagger_android      : "com.google.dagger:dagger-android:${version.dagger}",
+            butterknife         : "com.jakewharton:butterknife:${version.butterknife}",
+            material_dimen      : "com.dmitrymalkovich.android:material-design-dimens:${version.material_dimen}",
+            glide               : "com.github.bumptech.glide:glide:${version.glide}",
+            recyclerview_binder : "jp.satorufujiwara:recyclerview-binder:${version.recyclerview_binder}",
+            materialish_progress: "com.pnikosis:materialish-progress:${version.materialish_progress}",
+            dagger_apt          : "com.google.dagger:dagger-compiler:${version.dagger}",
+            dagger_android_apt  : "com.google.dagger:dagger-android-processor:${version.dagger}",
+            butterknife_apt     : "com.jakewharton:butterknife-compiler:${version.butterknife}"
+    ]
+
+    presentationTestDependencies = [
+            junit          : "junit:junit:${version.junit}",
+            mockito_core   : "org.mockito:mockito-core:${version.mockito}",
+            mockito_android: "org.mockito:mockito-android:${version.mockito}",
+            espresso       : "com.android.support.test.espresso:espresso-core:${version.espresso}"
+    ]
+
+}
+
