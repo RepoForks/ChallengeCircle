@@ -36,6 +36,10 @@ android {
     }
 }
 
+jacoco {
+    reportsDir = file("$project.rootDir/outputs/reports/jacoco-$project.name")
+}
+
 jacocoAndroidUnitTestReport {
     csv.enabled false
     html.enabled true

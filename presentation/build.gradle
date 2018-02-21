@@ -29,7 +29,8 @@ android {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro',
+                    "$rootProject.projectDir/domain/proguard-rules.pro"
 
             multiDexEnabled false
 
@@ -65,6 +66,10 @@ android {
         abortOnError false
         disable 'InvalidPackage'
     }
+}
+
+jacoco {
+    reportsDir = file("$project.rootDir/outputs/reports/jacoco-$project.name")
 }
 
 jacocoAndroidUnitTestReport {

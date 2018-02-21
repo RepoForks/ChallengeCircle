@@ -1,42 +1,22 @@
-apply plugin: 'com.android.library'
-apply plugin: 'jacoco-android'
+apply plugin: 'java'
+apply plugin: 'jacoco'
 
 apply from: "$rootProject.projectDir/libraries.gradle"
 
-android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            consumerProguardFiles 'proguard-rules.pro'
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    packagingOptions {
-        exclude 'META-INF/*'
-    }
-    lintOptions {
-        abortOnError false
-        disable 'InvalidPackage'
-    }
+// Jacoco Test Coverage Report
+jacoco {
+    reportsDir = file("$project.rootDir/outputs/reports/jacoco-$project.name")
 }
 
-jacocoAndroidUnitTestReport {
-    csv.enabled false
-    html.enabled true
-    xml.enabled true
+jacocoTestReport {
+    reports {
+        csv.enabled false
+        xml.enabled true
+        html.enabled true
+    }
 }
 
 dependencies {
