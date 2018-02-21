@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 
+apply from: "$rootProject.projectDir/keystore.gradle"
 apply from: "$rootProject.projectDir/libraries.gradle"
 
-// Android Plugin
+// Android Configs
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
@@ -23,15 +24,32 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file(keystore.KEYSTORE_RELEASE_FILE)
+            storePassword keystore.KEYSTORE_RELEASE_PASSWORD
+            keyAlias keystore.KEYSTORE_RELEASE_ALIAS
+            keyPassword keystore.KEYSTORE_RELEASE_PASSWORD
+        }
+        debug {
+            storeFile file(keystore.KEYSTORE_DEBUG_FILE)
+            storePassword keystore.KEYSTORE_DEBUG_PASSWORD
+            keyAlias keystore.KEYSTORE_DEBUG_ALIAS
+            keyPassword keystore.KEYSTORE_DEBUG_PASSWORD
+        }
+    }
+
     buildTypes {
         release {
             debuggable false
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro',
                     "$rootProject.projectDir/domain/proguard-rules.pro"
 
+            testCoverageEnabled false
             multiDexEnabled false
 
             //For @string in xml files
@@ -43,10 +61,12 @@ android {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled false
+            signingConfig signingConfigs.debug
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
+            testCoverageEnabled true
             multiDexEnabled false
 
             //For @string in xml files
@@ -62,6 +82,7 @@ android {
     packagingOptions {
         exclude 'META-INF/*'
     }
+
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'
@@ -77,6 +98,8 @@ jacocoAndroidUnitTestReport {
     html.enabled true
     xml.enabled true
 }
+
+check.dependsOn jacocoTestReport
 
 // Dependencies
 dependencies {

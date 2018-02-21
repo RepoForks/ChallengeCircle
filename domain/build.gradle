@@ -19,6 +19,8 @@ jacocoTestReport {
     }
 }
 
+check.dependsOn jacocoTestReport
+
 dependencies {
     // Test
     testImplementation libraries.junit

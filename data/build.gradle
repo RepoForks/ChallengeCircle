@@ -3,6 +3,7 @@ apply plugin: 'jacoco-android'
 
 apply from: "$rootProject.projectDir/libraries.gradle"
 
+// Android Configs
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
@@ -19,6 +20,7 @@ android {
     buildTypes {
         release {
             consumerProguardFiles 'proguard-rules.pro'
+            testCoverageEnabled false
         }
     }
 
@@ -30,6 +32,7 @@ android {
     packagingOptions {
         exclude 'META-INF/*'
     }
+
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'  // Some libraries have issues with this
@@ -45,6 +48,8 @@ jacocoAndroidUnitTestReport {
     html.enabled true
     xml.enabled true
 }
+
+check.dependsOn jacocoTestReport
 
 dependencies {
     implementation project(':domain')
