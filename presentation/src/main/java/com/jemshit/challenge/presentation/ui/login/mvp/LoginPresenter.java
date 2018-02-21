@@ -1,6 +1,8 @@
 package com.jemshit.challenge.presentation.ui.login.mvp;
 
 import com.jemshit.challenge.domain.interactor.Login;
+import com.jemshit.challenge.presentation.R;
+import com.jemshit.challenge.presentation.provider.ResourceProvider;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,13 +17,16 @@ public class LoginPresenter implements LoginContract.Presenter {
     private Scheduler subscribeOnScheduler;
     private Scheduler observeOnScheduler;
     private Disposable disposable;
+    private ResourceProvider resourceProvider;
 
     @Inject
     public LoginPresenter(Login loginUseCase, @Named("IoWorkScheduler") Scheduler subscribeOnScheduler,
-                          @Named("MainScheduler") Scheduler observeOnScheduler) {
+                          @Named("MainScheduler") Scheduler observeOnScheduler,
+                          @Named("AndroidResourceProvider") ResourceProvider resourceProvider) {
         this.loginUseCase = loginUseCase;
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
+        this.resourceProvider = resourceProvider;
     }
 
     @Override
@@ -42,7 +47,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                             }
                         },
                         throwable -> {
-                            if (isViewAttached()) view.onLoginError(throwable.getMessage());
+                            if (isViewAttached()) view.onLoginError(resourceProvider.getString(R.string.error_global));
                         }
                 );
     }

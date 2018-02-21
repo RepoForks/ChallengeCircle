@@ -6,6 +6,7 @@ import com.jemshit.challenge.data.di.NetworkModule;
 import com.jemshit.challenge.data.di.RepositoryModule;
 import com.jemshit.challenge.presentation.ChallengeApplication;
 import com.jemshit.challenge.presentation.di.module.AppScopeActivityBinders;
+import com.jemshit.challenge.presentation.di.module.ApplicationBindsModule;
 import com.jemshit.challenge.presentation.di.module.ApplicationModule;
 
 import javax.inject.Singleton;
@@ -21,6 +22,7 @@ import dagger.Component;
                 DataModule.class,
                 NetworkModule.class,
                 RepositoryModule.class,
+                ApplicationBindsModule.class,
 
                 AppScopeActivityBinders.class
         }
