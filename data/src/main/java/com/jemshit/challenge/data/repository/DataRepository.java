@@ -17,9 +17,9 @@ import io.reactivex.Single;
 @Singleton
 public class DataRepository implements Repository {
 
-    private DataSourceFactory dataSourceFactory;
-    private UserEntityMapper userEntityMapper;
-    private ProfileEntityMapper profileEntityMapper;
+    private final DataSourceFactory dataSourceFactory;
+    private final UserEntityMapper userEntityMapper;
+    private final ProfileEntityMapper profileEntityMapper;
 
     @Inject
     public DataRepository(DataSourceFactory dataSourceFactory, UserEntityMapper userEntityMapper, ProfileEntityMapper profileEntityMapper) {
@@ -30,7 +30,7 @@ public class DataRepository implements Repository {
 
     @Override public Single<Boolean> login(String username, String password) {
         return dataSourceFactory.getRemoteDataSource().login(username, password)
-                .map(loginResponseEntity -> loginResponseEntity.getToken()!=null);
+                .map(loginResponseEntity -> loginResponseEntity.getToken() != null);
     }
 
     @Override public Single<List<UserModel>> getProfileList(String token) {

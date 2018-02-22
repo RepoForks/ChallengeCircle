@@ -17,9 +17,9 @@ import javax.inject.Singleton;
 @Singleton
 public class SharedPrefCache implements Cache {
 
-    private SharedPreferences sharedPreferences;
-    private Serializer serializer;
-    private ContentValidator contentValidator;
+    private final SharedPreferences sharedPreferences;
+    private final Serializer serializer;
+    private final ContentValidator contentValidator;
 
     @Inject
     public SharedPrefCache(@Named("AppContext") Context context, Serializer serializer, ContentValidator contentValidator) {

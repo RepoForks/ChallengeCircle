@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 @Singleton
 public class ProfileEntityMapper {
 
-    private DateHelper dateHelper;
+    private final DateHelper dateHelper;
 
     @Inject
     public ProfileEntityMapper(DateHelper dateHelper) {

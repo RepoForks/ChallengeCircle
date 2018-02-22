@@ -8,7 +8,7 @@ import com.jemshit.challenge.data.entity.web_responses.ProfileEntity;
 import com.jemshit.challenge.data.entity.web_responses.UserEntity;
 import com.jemshit.challenge.data.exception.FetchDataException;
 import com.jemshit.challenge.data.other.ConstantsCache;
-import com.jemshit.challenge.data.web_service.ApiService;
+import com.jemshit.challenge.data.datasource.remote.web_service.ApiService;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ import io.reactivex.Single;
 @Singleton
 public class RemoteDataSource implements DataSource {
 
-    private ApiService apiService;
-    private Cache cache;
+    private final ApiService apiService;
+    private final Cache cache;
 
     @Inject
     public RemoteDataSource(ApiService apiService, @Named("SharedPrefCache") Cache cache) {

@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 @Singleton
 public class DateHelper {
 
-    private SimpleDateFormat dateFormat;
+    private final SimpleDateFormat dateFormat;
 
     @Inject
     public DateHelper() {

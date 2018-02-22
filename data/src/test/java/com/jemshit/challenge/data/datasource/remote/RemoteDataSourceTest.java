@@ -7,7 +7,7 @@ import com.jemshit.challenge.data.entity.web_responses.ProfileEntity;
 import com.jemshit.challenge.data.entity.web_responses.UserEntity;
 import com.jemshit.challenge.data.exception.FetchDataException;
 import com.jemshit.challenge.data.test_helper.DataGenerator;
-import com.jemshit.challenge.data.web_service.ApiService;
+import com.jemshit.challenge.data.datasource.remote.web_service.ApiService;
 
 import junit.framework.Assert;
 

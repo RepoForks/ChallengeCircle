@@ -1,4 +1,4 @@
-package com.jemshit.challenge.domain.interactor;
+package com.jemshit.challenge.domain.use_case;
 
 import com.jemshit.challenge.domain.ContentValidator;
 import com.jemshit.challenge.domain.exception.ParameterEmptyException;
@@ -13,8 +13,8 @@ import io.reactivex.Single;
 @Singleton
 public class GetProfileById {
 
-    private Repository repository;
-    private ContentValidator contentValidator;
+    private final Repository repository;
+    private final ContentValidator contentValidator;
 
     @Inject
     public GetProfileById(Repository repository, ContentValidator contentValidator) {

@@ -1,4 +1,4 @@
-package com.jemshit.challenge.domain.interactor;
+package com.jemshit.challenge.domain.use_case;
 
 import com.jemshit.challenge.domain.ContentValidator;
 import com.jemshit.challenge.domain.exception.ParameterEmptyException;

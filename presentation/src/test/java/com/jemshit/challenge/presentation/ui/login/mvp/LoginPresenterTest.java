@@ -1,6 +1,6 @@
 package com.jemshit.challenge.presentation.ui.login.mvp;
 
-import com.jemshit.challenge.domain.interactor.Login;
+import com.jemshit.challenge.domain.use_case.Login;
 import com.jemshit.challenge.presentation.provider.AndroidResourceProvider;
 
 import org.junit.After;

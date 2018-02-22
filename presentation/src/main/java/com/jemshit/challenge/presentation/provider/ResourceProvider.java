@@ -18,11 +18,11 @@
 package com.jemshit.challenge.presentation.provider;
 
 public interface ResourceProvider {
-    public <KEY_TYPE> String getString(KEY_TYPE resourceIdentifier);
+    <KEY_TYPE> String getString(KEY_TYPE resourceIdentifier);
 
-    public <KEY_TYPE> int getInteger(KEY_TYPE resourceIdentifier);
+    <KEY_TYPE> int getInteger(KEY_TYPE resourceIdentifier);
 
-    public <KEY_TYPE> boolean getBoolean(KEY_TYPE resourceIdentifier);
+    <KEY_TYPE> boolean getBoolean(KEY_TYPE resourceIdentifier);
 
-    public <KEY_TYPE> int getColor(KEY_TYPE resourceIdentifier);
+    <KEY_TYPE> int getColor(KEY_TYPE resourceIdentifier);
 }

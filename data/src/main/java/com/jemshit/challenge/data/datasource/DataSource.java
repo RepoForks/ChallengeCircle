@@ -10,11 +10,11 @@ import io.reactivex.Single;
 
 public interface DataSource {
 
-    public Single<LoginResponseEntity> login(String username, String password);
+    Single<LoginResponseEntity> login(String username, String password);
 
-    public Single<List<UserEntity>> getProfileList(String token);
+    Single<List<UserEntity>> getProfileList(String token);
 
-    public Single<ProfileEntity> getProfile(String profileId);
+    Single<ProfileEntity> getProfile(String profileId);
 
-    public String getToken();
+    String getToken();
 }

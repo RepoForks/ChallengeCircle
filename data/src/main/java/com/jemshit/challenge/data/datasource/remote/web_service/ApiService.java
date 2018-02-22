@@ -1,4 +1,4 @@
-package com.jemshit.challenge.data.web_service;
+package com.jemshit.challenge.data.datasource.remote.web_service;
 
 import com.jemshit.challenge.data.entity.web_responses.GetProfileListResponseEntity;
 import com.jemshit.challenge.data.entity.web_responses.LoginResponseEntity;

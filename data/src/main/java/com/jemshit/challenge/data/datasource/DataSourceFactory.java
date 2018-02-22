@@ -11,9 +11,9 @@ import javax.inject.Singleton;
 @Singleton
 public class DataSourceFactory {
 
-    private LocalDataSource localDataSource;
-    private RemoteDataSource remoteDataSource;
-    private Cache cache;
+    private final LocalDataSource localDataSource;
+    private final RemoteDataSource remoteDataSource;
+    private final Cache cache;
 
     @Inject
     public DataSourceFactory(LocalDataSource localDataSource, RemoteDataSource remoteDataSource, @Named("SharedPrefCache") Cache cache) {
