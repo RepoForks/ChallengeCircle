@@ -1,3 +1,5 @@
+apply from: "$rootProject.projectDir/dependencies.gradle"
+
 buildscript {
     repositories {
         jcenter()
@@ -8,7 +10,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
     }
 }
@@ -20,5 +22,27 @@ allprojects {
         maven { url 'https://jitpack.io' }
         google()
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir, 'outputs/reports'
+}
+
+
+// Test Tasks (https://github.com/android10/Android-CleanArchitecture/blob/master/build.gradle)
+task runDomainUnitTests(dependsOn: [':domain:test']) {
+    description 'Run unit tests for the domain layer.'
+}
+
+task runDataUnitTests(dependsOn: [':data:cleanTestDebugUnitTest', ':data:testDebugUnitTest']) {
+    description 'Run unit tests for the data layer.'
+}
+
+task runUnitTests(dependsOn: ['runDomainUnitTests', 'runDataUnitTests']) {
+    description 'Run unit tests for both domain and data layers.'
+}
+
+task runAcceptanceTests(dependsOn: [':presentation:connectedAndroidTest']) {
+    description 'Run application acceptance tests.'
 }
 

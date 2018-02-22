@@ -1,4 +1,4 @@
-package com.jemshit.challenge.domain.interactor;
+package com.jemshit.challenge.domain.use_case;
 
 import com.jemshit.challenge.domain.model.UserModel;
 import com.jemshit.challenge.domain.repository.Repository;
@@ -13,7 +13,7 @@ import io.reactivex.Single;
 @Singleton
 public class GetProfileList {
 
-    private Repository repository;
+    private final Repository repository;
 
     @Inject
     public GetProfileList(Repository repository) {

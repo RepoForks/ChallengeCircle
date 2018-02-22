@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'jacoco-android'
 
-apply from: "$rootProject.projectDir/libraries.gradle"
-
+// Android Configs
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -19,6 +18,7 @@ android {
     buildTypes {
         release {
             consumerProguardFiles 'proguard-rules.pro'
+            testCoverageEnabled false
         }
     }
 
@@ -30,10 +30,15 @@ android {
     packagingOptions {
         exclude 'META-INF/*'
     }
+
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'  // Some libraries have issues with this
     }
+}
+
+jacoco {
+    reportsDir = file("$project.rootDir/outputs/reports/jacoco-$project.name")
 }
 
 jacocoAndroidUnitTestReport {
@@ -42,27 +47,34 @@ jacocoAndroidUnitTestReport {
     xml.enabled true
 }
 
+check.dependsOn jacocoTestReport
+
 dependencies {
+    def dataDependencies = rootProject.ext.dataDependencies
+    def dataTestDependencies = rootProject.ext.dataTestDependencies
+
     implementation project(':domain')
 
     // Test Libraries
-    testImplementation libraries.junit
-    testImplementation libraries.mockito_core
-    androidTestImplementation libraries.mockito_android
-    androidTestImplementation(libraries.espresso, {
+    testImplementation dataTestDependencies.junit
+    testImplementation dataTestDependencies.mockito_core
+    testImplementation dataTestDependencies.support_test_runner
+    androidTestImplementation dataTestDependencies.mockito_android
+    androidTestImplementation(dataTestDependencies.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation libraries.support_test_runner
 
     //Others
-    implementation libraries.rxjava2
-    api libraries.retrofit
-    api libraries.retrofit_converter_gson
-    implementation libraries.gson
-    implementation libraries.okhttp_logging_interceptor
-    implementation libraries.okhttp
-    implementation libraries.retrofit_adapter_rxjava2
-    implementation libraries.dagger
-    annotationProcessor libraries.dagger_apt
+    api dataDependencies.retrofit
+    api dataDependencies.gson
+
+    implementation dataDependencies.rxjava2
+    implementation dataDependencies.retrofit_converter_gson
+    implementation dataDependencies.okhttp_logging_interceptor
+    implementation dataDependencies.okhttp
+    implementation dataDependencies.retrofit_adapter_rxjava2
+    implementation dataDependencies.dagger
+
+    annotationProcessor dataDependencies.dagger_apt
 
 }

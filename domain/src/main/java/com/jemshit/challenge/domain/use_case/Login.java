@@ -1,4 +1,4 @@
-package com.jemshit.challenge.domain.interactor;
+package com.jemshit.challenge.domain.use_case;
 
 import com.jemshit.challenge.domain.ContentValidator;
 import com.jemshit.challenge.domain.exception.ParameterEmptyException;
@@ -12,8 +12,8 @@ import io.reactivex.Single;
 @Singleton
 public class Login {
 
-    private Repository repository;
-    private ContentValidator contentValidator;
+    private final Repository repository;
+    private final ContentValidator contentValidator;
 
     @Inject
     public Login(Repository repository, ContentValidator contentValidator) {

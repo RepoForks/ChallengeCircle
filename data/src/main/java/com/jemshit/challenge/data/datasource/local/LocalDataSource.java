@@ -21,7 +21,7 @@ import io.reactivex.Single;
 @Singleton
 public class LocalDataSource implements DataSource {
 
-    private Cache cache;
+    private final Cache cache;
 
     @Inject
     public LocalDataSource(@Named("SharedPrefCache") Cache cache) {

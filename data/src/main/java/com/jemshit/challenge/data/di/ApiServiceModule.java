@@ -1,6 +1,6 @@
 package com.jemshit.challenge.data.di;
 
-import com.jemshit.challenge.data.web_service.ApiService;
+import com.jemshit.challenge.data.datasource.remote.web_service.ApiService;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

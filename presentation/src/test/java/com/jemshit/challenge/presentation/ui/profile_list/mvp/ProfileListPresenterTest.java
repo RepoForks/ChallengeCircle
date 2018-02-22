@@ -1,6 +1,6 @@
 package com.jemshit.challenge.presentation.ui.profile_list.mvp;
 
-import com.jemshit.challenge.domain.interactor.GetProfileList;
+import com.jemshit.challenge.domain.use_case.GetProfileList;
 
 import org.junit.After;
 import org.junit.Before;

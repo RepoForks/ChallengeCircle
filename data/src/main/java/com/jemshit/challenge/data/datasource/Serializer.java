@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class Serializer {
-    private Gson gson;
+    private final Gson gson;
 
     @Inject
     public Serializer(@Named("Other") Gson gson) {

@@ -1,17 +1,17 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 
-apply from: "$rootProject.projectDir/libraries.gradle"
+apply from: "$rootProject.projectDir/keystore.gradle"
 
-// Android Plugin
+// Android Configs
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId 'com.jemshit.challenge'
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionName "1.0.0"
         versionCode 1
 
@@ -23,14 +23,32 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file(keystore.KEYSTORE_RELEASE_FILE)
+            storePassword keystore.KEYSTORE_RELEASE_PASSWORD
+            keyAlias keystore.KEYSTORE_RELEASE_ALIAS
+            keyPassword keystore.KEYSTORE_RELEASE_PASSWORD
+        }
+        debug {
+            storeFile file(keystore.KEYSTORE_DEBUG_FILE)
+            storePassword keystore.KEYSTORE_DEBUG_PASSWORD
+            keyAlias keystore.KEYSTORE_DEBUG_ALIAS
+            keyPassword keystore.KEYSTORE_DEBUG_PASSWORD
+        }
+    }
+
     buildTypes {
         release {
             debuggable false
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro',
+                    "$rootProject.projectDir/domain/proguard-rules.pro"
 
+            testCoverageEnabled false
             multiDexEnabled false
 
             //For @string in xml files
@@ -42,10 +60,12 @@ android {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled false
+            signingConfig signingConfigs.debug
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
+            testCoverageEnabled true
             multiDexEnabled false
 
             //For @string in xml files
@@ -61,10 +81,15 @@ android {
     packagingOptions {
         exclude 'META-INF/*'
     }
+
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'
     }
+}
+
+jacoco {
+    reportsDir = file("$project.rootDir/outputs/reports/jacoco-$project.name")
 }
 
 jacocoAndroidUnitTestReport {
@@ -73,37 +98,40 @@ jacocoAndroidUnitTestReport {
     xml.enabled true
 }
 
+check.dependsOn jacocoTestReport
+
 // Dependencies
 dependencies {
-    // Modules and .jar libraries
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
     implementation project(':domain')
     implementation project(':data')
 
     //Test Libraries
-    androidTestImplementation libraries.mockito_android
-    androidTestImplementation(libraries.espresso, {
+    testImplementation presentationTestDependencies.junit
+    testImplementation presentationTestDependencies.mockito_core
+
+    androidTestImplementation presentationTestDependencies.mockito_android
+    androidTestImplementation(presentationTestDependencies.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation libraries.junit
-    testImplementation libraries.mockito_core
 
     // Other Libraries
-    implementation libraries.support_appcompat_v7
-    implementation libraries.support_v4
-    implementation libraries.support_design
-    implementation libraries.support_recyclerview
+    implementation presentationDependencies.support_appcompat_v7
+    implementation presentationDependencies.support_v4
+    implementation presentationDependencies.support_design
+    implementation presentationDependencies.support_recyclerview
+    implementation presentationDependencies.rxjava2
+    implementation presentationDependencies.rxandroid2
+    implementation presentationDependencies.dagger
+    implementation presentationDependencies.dagger_android
+    implementation presentationDependencies.butterknife
+    implementation presentationDependencies.material_dimen
+    implementation presentationDependencies.glide
+    implementation presentationDependencies.materialish_progress
 
-    implementation libraries.rxjava2
-    implementation libraries.rxandroid2
-
-    implementation libraries.dagger
-    annotationProcessor libraries.dagger_apt
-    implementation libraries.dagger_android
-    annotationProcessor libraries.dagger_android_apt
-
-    implementation libraries.butterknife
-    annotationProcessor libraries.butterknife_apt
-    implementation libraries.material_dimen
-    implementation libraries.glide
-    implementation libraries.materialish_progress
+    annotationProcessor presentationDependencies.dagger_apt
+    annotationProcessor presentationDependencies.dagger_android_apt
+    annotationProcessor presentationDependencies.butterknife_apt
 }

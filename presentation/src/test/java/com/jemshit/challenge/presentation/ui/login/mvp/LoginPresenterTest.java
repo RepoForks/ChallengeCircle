@@ -1,6 +1,7 @@
 package com.jemshit.challenge.presentation.ui.login.mvp;
 
-import com.jemshit.challenge.domain.interactor.Login;
+import com.jemshit.challenge.domain.use_case.Login;
+import com.jemshit.challenge.presentation.provider.AndroidResourceProvider;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,10 +23,11 @@ public class LoginPresenterTest {
     private LoginPresenter presenter;
     @Mock private LoginContract.View view;
     @Mock private Login loginUseCase;
+    @Mock AndroidResourceProvider resourceProvider;
 
     @Before
     public void setUp() throws Exception {
-        presenter = new LoginPresenter(loginUseCase, Schedulers.trampoline(), Schedulers.trampoline());
+        presenter = new LoginPresenter(loginUseCase, Schedulers.trampoline(), Schedulers.trampoline(), resourceProvider);
         presenter.attachView(view);
     }
 
@@ -71,6 +73,8 @@ public class LoginPresenterTest {
         // Assign
         Mockito.when(loginUseCase.execute(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
                 .thenReturn(Single.error(new Throwable()));
+        Mockito.when(resourceProvider.getString(ArgumentMatchers.anyInt()))
+                .thenReturn("errorString");
 
         // Act
         presenter.login("", "");
@@ -78,7 +82,7 @@ public class LoginPresenterTest {
         // Assert
         Mockito.verify(view).showLoading();
         Mockito.verify(view, Mockito.times(0)).onLoginSuccess();
-        Mockito.verify(view).onLoginError(ArgumentMatchers.any());
+        Mockito.verify(view).onLoginError("errorString");
         Mockito.verifyNoMoreInteractions(view);
     }
 
