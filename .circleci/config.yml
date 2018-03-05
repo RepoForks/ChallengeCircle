@@ -47,14 +47,15 @@ jobs:       # Each job represents a phase in your Build-Test-Deploy process.
       - run:
           name: Compile
           #  runs the unit tests, and runs the built in linting tools to check your code for style issues.
-          command: ./gradlew assemble
+          command: ./gradlew clean assemble
       - store_artifacts:
-          path: presentation/build/outputs/apk/release
+          path: presentation/build/outputs/apk/release/presentation-release.apk
+          destination: artifacts
 
       - run:
           name: Run Tests
           #  runs the unit tests, and runs the built in linting tools to check your code for style issues.
-          command: ./gradlew assemble lint test
+          command: ./gradlew lint test
 
       - run:
           name: Run Jacoco Test Coverage
