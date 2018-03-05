@@ -92,3 +92,7 @@ jobs:       # Each job represents a phase in your Build-Test-Deploy process.
           destination: reports/domain
       - store_test_results:
           path: domain/build/test-results
+
+      - run:
+        name: Upload Jacoco Report To Codecov
+        command: bash <(curl -s https://codecov.io/bash)
