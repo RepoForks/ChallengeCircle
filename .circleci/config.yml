@@ -51,9 +51,9 @@ jobs:       # Each job represents a phase in your Build-Test-Deploy process.
 
       # upload the build reports as build artifacts
       - store_artifacts:
-          path: app/build/reports
+          path: presentation/build/reports
           destination: reports
 
       # upload the test metadata (XML) for CircleCI to process.
       - store_test_results:
-          path: app/build/test-results
+          path: presentation/build/test-results
