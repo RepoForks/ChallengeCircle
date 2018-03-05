@@ -1,42 +1,59 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
-jobs:
-  build:
+version: 2  # CircleCi version
+
+jobs:       # Each job represents a phase in your Build-Test-Deploy process.
+
+  build:    # Build job
+
+    # This is the directory into which our code will be checked out, and this path will be used as the default
+    # working directory for the rest of the job unless otherwise specified.
+    working_directory: ~/code
+
+    # we can specify container images under a docker key.
     docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
+      # List at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/openjdk:8-jdk
+      - image: circleci/android:api-27-alpha
 
     environment:
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
 
+    # several steps within the build job.
     steps:
-      - checkout
+      - checkout    #from git
 
-      # Download and cache dependencies
+      # pull down the cache, if present. If this is your first run, or if you’ve changed either of
+      # your build.gradle files, this won’t do anything.
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+          #      - run:
+          #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+          #         command: sudo chmod +x ./gradlew
 
-      - run: gradle dependencies
+      - run:
+          name: Download Dependencies
+          # pull down the project’s dependencies. Normally you never call this task directly since it’s
+          # done automatically when it’s needed, but calling it directly allows us to insert a save_cache step
+          # that will store the dependencies in order to speed things up for next time.
+          command: ./gradlew androidDependencies
 
+      # store the dependencies in order to speed things up for next time.
       - save_cache:
           paths:
             - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
 
-      # run tests!
-      - run: gradle check
+      - run:
+          name: Run Tests
+          #  runs the unit tests, and runs the built in linting tools to check your code for style issues.
+          command: ./gradlew lint test
+
+      # upload the build reports as build artifacts
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+
+      # upload the test metadata (XML) for CircleCI to process.
+      - store_test_results:
+          path: app/build/test-results
