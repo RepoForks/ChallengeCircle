@@ -45,15 +45,26 @@ jobs:       # Each job represents a phase in your Build-Test-Deploy process.
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
 
       - run:
+          name: Compile
+          #  runs the unit tests, and runs the built in linting tools to check your code for style issues.
+          command: ./gradlew assemble
+      - store_artifacts:
+          path: presentation/build/outputs/apk/release
+
+      - run:
           name: Run Tests
           #  runs the unit tests, and runs the built in linting tools to check your code for style issues.
-          command: ./gradlew lint test
+          command: ./gradlew assemble lint test
+
+      - run:
+          name: Run Jacoco Test Coverage
+          #  jacoco test coverage
+          command: ./gradlew jacocoTestReport
 
       # upload the build reports as build artifacts
       - store_artifacts:
           path: presentation/build/reports
           destination: reports/presentation
-
       # upload the test metadata (XML) for CircleCI to process.
       - store_test_results:
           path: presentation/build/test-results
@@ -62,7 +73,6 @@ jobs:       # Each job represents a phase in your Build-Test-Deploy process.
       - store_artifacts:
           path: data/build/reports
           destination: reports/data
-
       - store_test_results:
           path: data/build/test-results
 
@@ -70,6 +80,5 @@ jobs:       # Each job represents a phase in your Build-Test-Deploy process.
       - store_artifacts:
           path: domain/build/reports
           destination: reports/domain
-
       - store_test_results:
           path: domain/build/test-results
